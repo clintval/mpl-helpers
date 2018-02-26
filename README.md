@@ -1,6 +1,6 @@
 <h1 align="center">mpl-helpers</h2>
 
-<p align="center">A Python 3.6 library tweaking <code>matplotlib</code> figures</p>
+<p align="center">A Python 3.6 library for tweaking <code>matplotlib</code> figures</p>
 
 <p align="center">
   <a href="#installation"><strong>Installation</strong></a>
