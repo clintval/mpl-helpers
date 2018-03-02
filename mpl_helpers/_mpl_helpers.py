@@ -2,42 +2,28 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import numpy as np
 
-__all__ = [
-    'ax_off',
-    'axes_off',
-    'darken_rgb',
-    'despine',
-    'grouped_bar_positions',
-    'is_luminous',
-    'lighten_rgb',
-    'maximum_xlim_bounds',
-    'maximum_ylim_bounds',
-    'ticklabels_to_integer',
-    'ticklabels_to_percent',
-    'ticklabels_to_scientific',
-    'ticklabels_to_thousands_sep',
-    'remove_every_other_tick',
-    'ticks_off']
 
-
-def ax_off(ax, axis='x'):
-    getattr(ax, f'get_{axis}axis')().set_visible(False)
+def ax_off(ax, which='x'):
+    """Turn off a specific axis in an ``ax``."""
+    getattr(ax, f'get_{which}axis')().set_visible(False)
     return ax
 
 
 def axes_off(ax):
+    """Turn off all axes in an ``ax``."""
     ax.get_xaxis().set_visible(False)
     ax.get_yaxis().set_visible(False)
     return ax
 
 
 def darken_rgb(rgb, p):
-    """Will darken an rgb value by p proportion"""
+    """Darken an "rgb" value by p proportion."""
     assert 0 <= p <= 1, "Proportion must be [0, 1]"
     return [int(x * (1 - p)) for x in rgb]
 
 
 def despine(ax, top=True, left=True, bottom=True, right=True):
+    """Selectively remove spines from an ``ax``."""
     for spine, on in zip(
         ('top', 'left', 'bottom', 'right'), (top, left, bottom, right)
     ):
@@ -46,6 +32,7 @@ def despine(ax, top=True, left=True, bottom=True, right=True):
 
 
 def grouped_bar_positions(num_groups, num_categories, cluster_width=0.2):
+    """Create groups centered on integers with a fixed category size."""
     clusters = []
 
     for i in range(num_categories):
@@ -58,6 +45,15 @@ def grouped_bar_positions(num_groups, num_categories, cluster_width=0.2):
 
 
 def is_luminous(rgb):
+    """Is an "rgb" value luminous.
+
+    Notes
+    -----
+    Determined using the formula at:
+
+        https://www.w3.org/TR/WCAG20/#relativeluminancedef
+
+    """
     new_color = []
 
     for c in rgb:
@@ -71,7 +67,7 @@ def is_luminous(rgb):
 
 
 def lighten_rgb(rgb, p):
-    """Will lighten an rgb value by p percent"""
+    """Will lighten an "rgb" value by p percent."""
     assert 0 <= p <= 1, "Proportion must be [0, 1]"
     return [int((255 - x) * p + x) for x in rgb]
 
@@ -92,9 +88,10 @@ def ticklabels_to_integer(ax, axis='y'):
     return ax
 
 
-def ticklabels_to_percent(ax, axis='y'):
+def ticklabels_to_percent(ax, axis='y', precision=1):
     getattr(ax, f'{axis}axis').set_major_formatter(
-        mticker.FuncFormatter(lambda s, position: '{0:0.1f}%'.format(s * 100)))
+        mticker.FuncFormatter(
+            lambda s, position: f'{{0:0.{precision}f}}%'.format(s * 100)))
     return ax
 
 
