@@ -13,8 +13,8 @@ except (ImportError, OSError):
 setup(
     name='mpl_helpers',
     packages=['mpl_helpers'],
-    version='0.2.0',
-    description='A Python 3.6 library for plotting mutational spectra.',
+    version='0.1.0',
+    description='A Python 3.6 library for tweaking matplotlib figures.',
     long_description=long_description,
     author='clintval',
     author_email='valentine.clint@gmail.com',
