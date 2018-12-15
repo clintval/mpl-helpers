@@ -20,18 +20,51 @@
 <h3 align="center">Installation</h3>
 
 ```
-❯ pip install git@github.com:clintval/mpl-helpers.git
+❯ pip install mpl_helpers
 ```
+
+Please not this project is under active and early development.
+
+Documentation, tests, and a consistent API will be provided in due time!
 
 <br>
 
 <h3 align="center">Tutorial</h3>
 
-Coming soon!
-
 ```python
 from mpl_helpers import *
 ```
+
+<br>
+
+**axis_off**: turn off x, y, or all axis in an `ax`
+
+**darken_rgb**: darken an RGB value by a given percent
+
+**despine**: remove either of the four spines in a cartesian `ax`
+
+**grouped_bar_positions**: create equi-spaced positions centered around integers
+
+**is_luminous**: determines if an RGB value is luminous
+
+**lighten_rgb**: lighten an RGB value by a given percent
+
+**maximum_xlim_bounds**: return the maximum xlim bounds by all `ax` objects
+
+**maximum_ylim_bounds**: return the minimum xlim bounds by all `ax` objects
+
+**ticklabels_to_integer**: use an integer formatter on ticklabels
+
+**ticklabels_to_percent**: use a percent formatter on ticklabels
+
+**ticklabels_to_scientific**: use a scientific notation formatter on ticklabels
+
+**ticklabels_to_thousands_sep**: use a thousands seperated comma formatter on ticklabels
+
+**remove_every_other_tick**: remove every other tick
+
+**ticks_off**: turn off x, y, or all axis ticks in an `ax`
+
 
 <br>
 

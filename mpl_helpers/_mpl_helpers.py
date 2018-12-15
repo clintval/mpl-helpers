@@ -3,23 +3,23 @@ import matplotlib.ticker as mticker
 import numpy as np
 
 
-def ax_off(ax, which='x'):
-    """Turn off a specific axis in an ``ax``."""
-    getattr(ax, f'get_{which}axis')().set_visible(False)
-    return ax
-
-
-def axes_off(ax):
-    """Turn off all axes in an ``ax``."""
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
+def axis_off(ax, which='both'):
+    """Turn off specific axis in an ``ax``."""
+    assert which in ('x', 'y', 'both'), 'Which must be `x`, `y`, or `both`.'
+    if which == 'both':
+        ax.get_xaxis().set_visible(False)
+        ax.get_yaxis().set_visible(False)
+    if which == 'x':
+        ax.get_xaxis().set_visible(False)
+    elif which == 'y':
+        ax.get_yaxis().set_visible(False)
     return ax
 
 
 def darken_rgb(rgb, p):
     """Darken an "rgb" value by p proportion."""
     assert 0 <= p <= 1, "Proportion must be [0, 1]"
-    return [int(x * (1 - p)) for x in rgb]
+    return [x * (1 - p) for x in rgb]
 
 
 def despine(ax, top=True, left=True, bottom=True, right=True):
@@ -96,6 +96,7 @@ def ticklabels_to_percent(ax, axis='y', precision=1):
 
 
 def ticklabels_to_scientific(ax, axis='y', precision=2):
+    print(precision)
     getattr(ax, f'{axis}axis').set_major_formatter(
         mticker.FuncFormatter(
             lambda s, position: f'{{:0.{precision}e}}'.format(s)))
@@ -120,6 +121,13 @@ def remove_every_other_tick(ax, axis):
                 ax.yaxis.get_major_ticks()[-i].tick1On = False
                 plt.setp(ax.get_yticklabels()[-i], visible=False)
     return ax
+
+
+def scientifc_notation_formatter(number, sig_fig=2, as_mathtext=False):
+    exponent_notation = f'{number:.{sig_fig:d}e}'
+    base, exponent = exponent_notation.split('e')
+    exponent = int(exponent)
+    return f'${base}⋅10^{{{exponent}}}$' if as_mathtext else f'{base}⋅10^{exponent}'
 
 
 def ticks_off(ax, which='both'):
